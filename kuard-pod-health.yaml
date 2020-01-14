@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: kuard-health
-    image: gcr.io/kuar-demo/kuard-amd64:1
+    image: gcr.azk8s.cn/kuar-demo/kuard-amd64:1
     resources:
       limits:
         memory: "128Mi"

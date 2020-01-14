@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: kuard
-    image: gcr.io/kuar-demo/kuard-amd64:1
+    image: gcr.azk8s.cn/kuar-demo/kuard-amd64:1
     volumeMounts:
       - mountPath: /tmp/vol # kuard-data 卷挂载到 /tmp/vol 路径
         name: kuard-data
