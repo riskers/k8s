@@ -9,7 +9,7 @@ spec:
   - name: kuard
     image: gcr.azk8s.cn/kuar-demo/kuard-amd64:1
     volumeMounts:
-      - mountPath: /tmp/vol # kuard-data 卷挂载到 /tmp/vol 路径
+      - mountPath: /data
         name: kuard-data
     resources:
       limits:
@@ -20,4 +20,4 @@ spec:
   volumes:
     - name: kuard-data # 定义一个名为 kuard-data 的卷
       hostPath:
-        path: /tmp/vol
+        path: /tmp/vol # kuard-data 卷挂载到 /tmp/vol 路径
