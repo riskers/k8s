@@ -8,9 +8,21 @@ spec:
   containers:
   - name: kuard
     image: gcr.azk8s.cn/kuar-demo/kuard-amd64:1
+    volumeMounts:
+      - mountPath: /data
+        name: kuard-data
     resources:
-      limits:
-        memory: "128Mi"
-        cpu: "500m"
+      requests: # 资源下限
+        memory: "64Mi" # 64 MB 内存
+        cpu: "500m" # 0.5 CPU
+      limits: # 资源上限
+        memory: "128Mi" # 128 MB 内存
+        cpu: "1000m" # 1 CPU
     ports:
       - containerPort: 8080
+        name: http
+        protocol: TCP
+  volumes:
+    - name: kuard-data # 定义一个名为 kuard-data 的卷
+      hostPath:
+        path: /tmp/vol # kuard-data 卷挂载到主机的 /tmp/vol 路径
