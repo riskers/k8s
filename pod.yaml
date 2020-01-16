@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-demo
+  labels:
+    app: k8s
+spec:
+  containers:
+    - name: k8s-demo
+      image: riskers/k8s-demo:0.1
+      imagePullPolicy: Never # 将imagePullPolicy设置为Never，否则Kubernetes将尝试下载图像。
+      ports:
+        - containerPort: 80
+  imagePullSecrets:
+    - name: regsecret # 为了能够下载私有镜像

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-demo-svc
+spec:
+  selector: # selector 指定请求会被发送给集群里的哪些 Pod，一般是用标签选择，app:k8s 在上面的 pod.yaml 里面指定了，所以这个服务会把流量发送给 k8s-demo 这个 Pod
+    app: k8s
+  type: NodePort # 指定服务暴露方式，这里是 NodePort，Master 会从由启动参数配置的范围 (默认是 30000-32767) 中分配一个端口，然后每一个 Node 都会将这个端口代理到你的 Service。。其他还有 LoadBalancer、Ingress 等
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
