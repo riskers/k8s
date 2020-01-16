@@ -9,6 +9,13 @@ spec:
     - name: k8s-demo
       image: riskers/k8s-demo:0.1
       imagePullPolicy: Never # 将imagePullPolicy设置为Never，否则Kubernetes将尝试下载图像。
+      resources:
+        requests: # 资源下限
+          memory: "64Mi" # 64 MB 内存
+          cpu: "500m" # 0.5 CPU
+        limits: # 资源上限
+          memory: "128Mi" # 128 MB 内存
+          cpu: "1000m" # 1 CPU
       ports:
         - containerPort: 80
   imagePullSecrets:
