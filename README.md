@@ -1,18 +1,26 @@
-## 准备镜像
+## 准备私有镜像
 
 ```bash
 cd k8s-demo-image
 docker build -t k8s-demo:0.1 .
+docker tag k8s-demo:0.1 riskers/k8s-demo:0.1
 ```
 
 ## k8s 能够 pull 私有镜像
 
+创建一个名为 regsecret 的 Secret :
+
 ```bash
-# 创建一个名为 regsecret 的 Secret :
-kubectl create secret docker-registry regsecret --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
+kubectl create secret docker-registry <registry-name> --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
 ```
 
 > https://k8smeetup.github.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+
+这里我用的是:
+
+```bash
+kubectl create secret docker-registry regsecret --docker-server=locahost --docker-username=riskers --docker-password=123 --docker-email=617273330@qq.com
+```
 
 ## pod
 
