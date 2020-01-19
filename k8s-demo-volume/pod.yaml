@@ -24,3 +24,4 @@ spec:
     - name: host-volume
       hostPath:
         path: /tmp/k8s-demo
+        type: Directory
