@@ -165,3 +165,15 @@ MYSQL_ROOT_PASSWORD=qazxsw
 
 ## Volume
 
+```bash
+> cd k8s-demo-volume
+
+# 把本机的 /tmp/k8s-demo 目录挂在了容器的 /data
+> kubectl apply -f pod.yaml
+
+> kubectl exec -it k8s-demo sh
+/ echo Hello! > /data/1.txt
+/ exit
+
+> cat /tmp/k8s-demo/1.txt
+```

@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-demo
+  labels:
+    app: k8s
+spec:
+  containers:
+  - name: k8s-demo
+    image: riskers/k8s-demo:0.1
+    resources:
+        requests:
+          memory: "64Mi"
+          cpu: "500m"
+        limits:
+          memory: "128Mi"
+          cpu: "1000m"
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - mountPath: /data
+      name: host-volume
+  volumes:
+    - name: host-volume
+      hostPath:
+        path: /tmp/k8s-demo
