@@ -49,3 +49,9 @@ kubectl get nodes -o wide
 # 2. 访问 31000 端口 (在 svc.yaml 中指定)
 curl <internal-ip>:31000
 ```
+
+## Deployment
+
+ReplicaSet 是副本的意思，简称 RS ，实际上多使用 Deployment 。
+
+> 一个 Deployment 拥有多个 Replica Set，而一个 Replica Set 拥有一个或多个 Pod
