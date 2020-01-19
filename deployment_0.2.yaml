@@ -5,18 +5,22 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: k8s # 和 pod.yaml 对应
-  replicas: 3 # 这个 deployment要有 3 个 pod
-  minReadySeconds: 3 # 指在更新了一个 Pod 后，需要在它进入正常状态后 3 秒再更新下一个 Pod
+      app: k8s
+  replicas: 3
+  minReadySeconds: 3
   strategy:
-    type: RollingUpdate # 升级策略是滚动升级 (RollingUpdate)
+    type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 1 # 指同时处于不可用状态的 Pod 不能超过一个
-      maxSurge: 1 # 指多余的 Pod 不能超过一个
+      maxUnavailable: 1
+      maxSurge: 1
+  # Pod 模板
+  # 包含 2 部分:
+  # - Pod.metadata ，包含了 labels，即跟 selector.matchLabels 相匹配的一个 Labels
+  # - Pod.spec，其实是 Deployment 最终创建出来 Pod 的时候，它所用的 Pod.spec
   template:
     metadata:
       labels:
-        app: k8s # 和 pod.yaml 对应
+        app: k8s
     spec:
       containers:
       - name: k8s-demo

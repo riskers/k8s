@@ -88,3 +88,42 @@ ReplicaSet 是副本的意思，简称 RS ，实际上多使用 Deployment 。
   kubectl rollout undo deployment k8s-demo-deployment --to-revision=2
   ```
 
+6. 缩容 / 扩容:
+
+  ```bash
+  # 缩容
+  kubectl scale --replicas=2 -f deployment_0.2.yaml
+
+  # 扩容
+  kubectl scale --replicas=7 -f deployment_0.2.yaml
+  ```
+
+  这是手动的，还有一些自动方案 ([HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)) 不做介绍
+
+## Job / CronJob
+
+### Job
+
+```bash
+kubectl apply -f job.yaml
+
+# 获得 Job 的 Pod 名字
+kubectl get pods --selector=job-name=k8s-demo-job
+
+NAME                 READY   STATUS      RESTARTS   AGE
+k8s-demo-job-868gz   0/1     Completed   0          2m40s # STATUS是完成的，因为这是一次性的
+
+# 查看 Pod 日志，可以看到代码中 print 的语句
+kubectl logs k8s-demo-job-868gz
+```
+
+### CronJob
+
+```bash
+kubectl apply -f cronjob.yaml
+
+kubectl get cronjobs
+
+kubectl delete -f cronjob.yaml
+```
+

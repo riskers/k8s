@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: k8s-demo-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: python-38
+        image: python:3.8-alpine
+        command: ["python",  "-c", "import socket; print(socket.gethostbyname(socket.gethostname()))"]
+      restartPolicy: Never # 重启策略，Never 表示不重启，另外还支持 OnFailure: 失败才重启
+  backoffLimit: 4 # 指定 job 失败后进行重试的次数
