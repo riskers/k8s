@@ -1,7 +1,7 @@
 ## 准备私有镜像
 
 ```bash
-cd k8s-demo-image
+cd k8s-demo-image-0.1
 docker build -t k8s-demo:0.1 .
 docker tag k8s-demo:0.1 riskers/k8s-demo:0.1
 ```
@@ -55,3 +55,36 @@ curl <internal-ip>:31000
 ReplicaSet 是副本的意思，简称 RS ，实际上多使用 Deployment 。
 
 > 一个 Deployment 拥有多个 Replica Set，而一个 Replica Set 拥有一个或多个 Pod
+
+1. 创建 deployment:
+
+  ```bash
+  kubectl create -f deployment_0.1.yaml
+  kubectl get deployments
+  ```
+
+2. 构建新镜像:
+
+  ```bash
+  cd k8s-demo-image-0.2
+  docker build -t riskers/k8s-demo:0.2 .
+  ```
+
+3. 更新版本:
+
+  ```bash
+  kubectl apply -f deployment_0.2.yaml
+  ```
+
+4. 访问 `<internal-ip>:31000` : `Hello k8s!`
+
+5. 回滚:
+
+  ```bash
+  # 查看发布历史
+  kubectl rollout history deployment k8s-demo-deployment
+
+  # 回滚 (--to-revision 指定版本)
+  kubectl rollout undo deployment k8s-demo-deployment --to-revision=2
+  ```
+
