@@ -39,3 +39,13 @@ kubectl create -f svc.yaml
 
 kubectl get svc k8s-demo-svc
 ```
+
+访问 service:
+
+```bash
+# 1. 得到 internal-ip 地址
+kubectl get nodes -o wide
+
+# 2. 访问 31000 端口 (在 svc.yaml 中指定)
+curl <internal-ip>:31000
+```

@@ -7,6 +7,6 @@ spec:
     app: k8s
   type: NodePort # 指定服务暴露方式，这里是 NodePort，Master 会从由启动参数配置的范围 (默认是 30000-32767) 中分配一个端口，然后每一个 Node 都会将这个端口代理到你的 Service。。其他还有 LoadBalancer、Ingress 等
   ports:
-    - nodePort: 31000
-      port: 80
+    - port: 80
       targetPort: 80
+      nodePort: 31000
