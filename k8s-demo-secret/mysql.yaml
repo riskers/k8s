@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: mysql
+  name: mysql-server
+spec:
+  containers:
+    - name: mysql
+      image: mysql:8.0.18
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "500m"
+        limits:
+          memory: "128Mi"
+          cpu: "1000m"
+      env:
+        - name: MYSQL_TCP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: k8s-demo-configmap
+              key: mysql.port
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef: # 这一部分与 configMop 不同
+              name: k8s-demo-secret
+              key: passwd

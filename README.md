@@ -127,3 +127,39 @@ kubectl get cronjobs
 kubectl delete -f cronjob.yaml
 ```
 
+## ConfigMap / Secret
+
+### ConfigMap
+
+```bash
+> cd k8s-demo-configmap
+
+> kubectl create -f config_map.yaml
+
+> kubectl apply -f mysql.yaml
+
+# 进入容器
+> kubectl exec -it mysql-server -- /bin/bash
+
+> root@mysql-server:/# env | grep MYSQL_SERVER_SERVICE_PORT
+MYSQL_SERVER_SERVICE_PORT=3308
+```
+
+### Secret
+
+MySQL 账号密码如果也是这种明文的方式存储很不安全。就需要用到 Secret 这种资源对象了：Secret 用来保存敏感信息，例如密码、密钥、各种 Token 等等
+
+```bash
+> kubectl apply -f secret.yaml
+
+> kubectl get secret k8s-demo-secret --output=jsonpath='{.data}'
+map[passwd:cWF6eHN3]
+
+> kubectl exec -it mysql-server -- /bin/bash
+
+> root@mysql-server:/# env|grep PASS
+MYSQL_ROOT_PASSWORD=qazxsw
+```
+
+## Volume
+
