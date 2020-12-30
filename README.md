@@ -177,3 +177,9 @@ MYSQL_ROOT_PASSWORD=qazxsw
 
 > cat /tmp/k8s-demo/1.txt
 ```
+
+----
+
+注意统一版本:
+
+![](https://github-riskers-blog.oss-cn-qingdao.aliyuncs.com/20201230205532.png)
