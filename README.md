@@ -183,3 +183,5 @@ MYSQL_ROOT_PASSWORD=qazxsw
 注意统一版本:
 
 ![](https://github-riskers-blog.oss-cn-qingdao.aliyuncs.com/20201230205532.png)
+
+> 这时候 minikube 就算开启 dashboard ，里面的东西也是对不上的
